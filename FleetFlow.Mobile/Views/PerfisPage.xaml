@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    TELA DE PERFIS DE USUÁRIO — FleetFlow
+    Lista os 4 perfis de acesso do sistema
+    (Administrador, Gestor de Frota, Financeiro, Motorista).
+    Cada cartão mostra um emoji, a descrição e a quantidade de usuários.
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FleetFlow.Mobile.Views.PerfisPage"
+             Title="Perfis"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ===== BARRA SUPERIOR (TopBar) azul-petróleo ===== -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource Petroleo}"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 0"
+                Padding="20,0">
+            <Label Text="Perfis de Usuário"
+                   TextColor="{StaticResource Branco}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="20"
+                   VerticalOptions="Center"/>
+        </Border>
+
+        <!-- ===== CONTEÚDO COM A LISTA DE PERFIS ===== -->
+        <ScrollView Grid.Row="1"
+                    Padding="16">
+            <VerticalStackLayout Spacing="0">
+
+                <!-- Texto explicativo no topo da lista -->
+                <Label Text="Selecione um perfil para gerenciar suas permissões"
+                       Style="{StaticResource LabelPequeno}"
+                       Margin="0,0,0,16"/>
+
+                <!-- Lista de perfis. IsEnabled="False" evita o destaque de
+                     seleção nativo do CollectionView (a lista é só visual). -->
+                <CollectionView ItemsSource="{Binding Perfis}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="12"/>
+                    </CollectionView.ItemsLayout>
+
+                    <!-- Modelo visual de cada perfil -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardDefault}">
+                                <!-- 3 colunas: emoji | nome+descrição | quantidade -->
+                                <Grid ColumnDefinitions="Auto,*,Auto"
+                                      ColumnSpacing="12"
+                                      VerticalOptions="Center">
+
+                                    <!-- Emoji do perfil (vem pronto do ViewModel) -->
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Icone}"
+                                           FontSize="40"
+                                           VerticalOptions="Center"/>
+
+                                    <!-- Nome e descrição do perfil -->
+                                    <VerticalStackLayout Grid.Column="1"
+                                                         Spacing="2"
+                                                         VerticalOptions="Center">
+                                        <Label Text="{Binding Nome}"
+                                               Style="{StaticResource LabelCorpo}"
+                                               FontFamily="OpenSansSemibold"/>
+                                        <Label Text="{Binding Descricao}"
+                                               Style="{StaticResource LabelPequeno}"/>
+                                    </VerticalStackLayout>
+
+                                    <!-- Quantidade de usuários vinculados ao perfil -->
+                                    <VerticalStackLayout Grid.Column="2"
+                                                         Spacing="0"
+                                                         HorizontalOptions="End"
+                                                         VerticalOptions="Center">
+                                        <Label Text="{Binding QuantidadeUsuarios}"
+                                               Style="{StaticResource LabelSecao}"
+                                               TextColor="{StaticResource Petroleo}"
+                                               HorizontalTextAlignment="End"/>
+                                        <Label Text="usuário(s)"
+                                               Style="{StaticResource LabelLegenda}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

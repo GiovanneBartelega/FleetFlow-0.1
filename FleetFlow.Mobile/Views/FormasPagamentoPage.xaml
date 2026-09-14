@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    TELA DE FORMAS DE PAGAMENTO — FleetFlow
+    Lista as 4 formas de pagamento da transportadora
+    (PIX, Boleto, Cartão Itaú, Cartão Sicoob).
+    O Switch de cada item liga/desliga a propriedade "Ativo" (apenas visual).
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FleetFlow.Mobile.Views.FormasPagamentoPage"
+             Title="Formas"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ===== BARRA SUPERIOR (TopBar) azul-petróleo ===== -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource Petroleo}"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 0"
+                Padding="20,0">
+            <Grid ColumnDefinitions="*,Auto"
+                  VerticalOptions="Center">
+
+                <Label Grid.Column="0"
+                       Text="Formas de Pagamento"
+                       TextColor="{StaticResource Branco}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="20"
+                       VerticalOptions="Center"/>
+
+                <!-- Botão circular âmbar de adicionar -->
+                <Button Grid.Column="1"
+                        Text="+"
+                        BackgroundColor="{StaticResource AmbarDourado}"
+                        TextColor="{StaticResource Petroleo}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="20"
+                        HeightRequest="36"
+                        WidthRequest="36"
+                        CornerRadius="18"
+                        Padding="0"
+                        Clicked="OnNovaFormaPagamentoClicked"/>
+            </Grid>
+        </Border>
+
+        <!-- ===== LISTA DE FORMAS DE PAGAMENTO ===== -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding FormasPagamento}"
+                        Margin="16">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+
+            <!-- Modelo visual de cada item da lista -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource CardDefault}">
+                        <!-- 3 colunas: ícone (50) | nome (flexível) | switch (automático) -->
+                        <Grid ColumnDefinitions="50,*,Auto"
+                              VerticalOptions="Center">
+
+                            <!-- Círculo âmbar com a letra da forma de pagamento -->
+                            <Frame Grid.Column="0"
+                                   HeightRequest="40"
+                                   WidthRequest="40"
+                                   CornerRadius="20"
+                                   Padding="0"
+                                   BackgroundColor="{StaticResource AmbarDourado}"
+                                   BorderColor="Transparent"
+                                   HasShadow="False"
+                                   VerticalOptions="Center">
+                                <Label Text="{Binding Icone}"
+                                       TextColor="{StaticResource Petroleo}"
+                                       FontFamily="OpenSansSemibold"
+                                       FontSize="18"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+
+                            <!-- Nome da forma de pagamento + status -->
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 VerticalOptions="Center">
+                                <Label Text="{Binding Nome}"
+                                       Style="{StaticResource LabelCorpo}"
+                                       FontFamily="OpenSansSemibold"/>
+                                <Label Text="Ativo"
+                                       Style="{StaticResource LabelPequeno}"
+                                       TextColor="{StaticResource VerdeEsmeralda}"/>
+                            </VerticalStackLayout>
+
+                            <!-- Interruptor ligado à propriedade "Ativo" do item.
+                                 Mode=TwoWay: mexer no switch atualiza o objeto em memória. -->
+                            <Switch Grid.Column="2"
+                                    IsToggled="{Binding Ativo, Mode=TwoWay}"
+                                    OnColor="{StaticResource AmbarDourado}"
+                                    VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

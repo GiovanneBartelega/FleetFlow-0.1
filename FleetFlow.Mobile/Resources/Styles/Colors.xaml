@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ============================================================
+         PALETA DE CORES DO FLEETFLOW
+         Todas as telas usam APENAS as cores definidas aqui.
+         Para trocar uma cor do aplicativo inteiro, mude só este arquivo.
+         ============================================================ -->
+
+    <!-- Cor primária da marca: azul-petróleo escuro (topo das telas, botões) -->
+    <Color x:Key="Petroleo">#0F3B5F</Color>
+
+    <!-- Cor de destaque/acento: âmbar dourado (botões de ação, abas ativas) -->
+    <Color x:Key="AmbarDourado">#F5A524</Color>
+
+    <!-- Verde de sucesso: saldos positivos, status "Ativo"/"Aprovado" -->
+    <Color x:Key="VerdeEsmeralda">#059669</Color>
+
+    <!-- Vermelho de erro: botões destrutivos e alertas críticos -->
+    <Color x:Key="Vermelho">#DC2626</Color>
+
+    <!-- Âmbar de alerta: avisos que não são erros graves -->
+    <Color x:Key="AmbarAlerta">#F59E0B</Color>
+
+    <!-- Azul de informação: mensagens informativas neutras -->
+    <Color x:Key="AzulInfo">#0891B2</Color>
+
+    <!-- Cor do texto principal (títulos e corpo de texto) -->
+    <Color x:Key="TextoPrincipal">#0F172A</Color>
+
+    <!-- Cor do texto secundário (descrições e textos de apoio) -->
+    <Color x:Key="TextoSecundario">#475569</Color>
+
+    <!-- Cor de textos de placeholder (dicas dentro de campos de texto) -->
+    <Color x:Key="Placeholder">#94A3B8</Color>
+
+    <!-- Cor de linhas divisórias e bordas sutis -->
+    <Color x:Key="Divisor">#E2E8F0</Color>
+
+    <!-- Cor de fundo padrão das telas (cinza bem clarinho) -->
+    <Color x:Key="BackgroundTela">#F8FAFC</Color>
+
+    <!-- Cor de fundo dos cartões (branco puro) -->
+    <Color x:Key="SuperficieCard">#FFFFFF</Color>
+
+    <!-- Fundo amarelo bem claro do cartão de "Insight" da tela inicial -->
+    <Color x:Key="FundoInsight">#FFFBEB</Color>
+
+    <!-- Cores auxiliares usadas nos "badges" (etiquetas coloridas) -->
+    <Color x:Key="VerdeSuave">#D1FAE5</Color>    <!-- fundo do badge de ENTRADA -->
+    <Color x:Key="VermelhoSuave">#FEE2E2</Color> <!-- fundo do badge de SAIDA -->
+    <Color x:Key="CinzaSuave">#F1F5F9</Color>    <!-- fundo do badge de status -->
+    <Color x:Key="CinzaBadge">#64748B</Color>    <!-- texto do badge de status -->
+    <Color x:Key="AzulGoogle">#4285F4</Color>    <!-- letra "G" do botão do Google -->
+    <Color x:Key="TextoBtnAmber">#4A2A0A</Color> <!-- texto escuro do botão âmbar -->
+    <Color x:Key="Branco">#FFFFFF</Color>
+
+    <!-- Pincéis (brushes) gerados a partir das cores acima.
+         O MAUI usa brushes em propriedades como BackgroundColor e BorderBrush. -->
+    <SolidColorBrush x:Key="PetroleoBrush" Color="{StaticResource Petroleo}"/>
+    <SolidColorBrush x:Key="AmbarDouradoBrush" Color="{StaticResource AmbarDourado}"/>
+    <SolidColorBrush x:Key="VerdeEsmeraldaBrush" Color="{StaticResource VerdeEsmeralda}"/>
+    <SolidColorBrush x:Key="VermelhoBrush" Color="{StaticResource Vermelho}"/>
+    <SolidColorBrush x:Key="DivisorBrush" Color="{StaticResource Divisor}"/>
+    <SolidColorBrush x:Key="SuperficieCardBrush" Color="{StaticResource SuperficieCard}"/>
+    <SolidColorBrush x:Key="BrancoBrush" Color="{StaticResource Branco}"/>
+</ResourceDictionary>

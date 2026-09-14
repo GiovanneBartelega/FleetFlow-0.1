@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    TELA DE CATEGORIAS — FleetFlow
+    Lista as 11 categorias financeiras da transportadora
+    (Fretes, Combustível, Pedágio etc.).
+    A lista vem do CategoriasViewModel, que usa dados fixos (mock).
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FleetFlow.Mobile.Views.CategoriasPage"
+             Title="Categorias"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ===== BARRA SUPERIOR (TopBar) azul-petróleo ===== -->
+        <Border Grid.Row="0"
+                BackgroundColor="{StaticResource Petroleo}"
+                HeightRequest="60"
+                StrokeShape="RoundRectangle 0"
+                Padding="20,0">
+            <!-- Grade com 2 colunas: título à esquerda, botão "+" à direita -->
+            <Grid ColumnDefinitions="*,Auto"
+                  VerticalOptions="Center">
+
+                <Label Grid.Column="0"
+                       Text="Categorias"
+                       TextColor="{StaticResource Branco}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="20"
+                       VerticalOptions="Center"/>
+
+                <!-- Botão circular âmbar de adicionar nova categoria.
+                     CornerRadius 18 (metade de 36) deixa o botão redondo. -->
+                <Button Grid.Column="1"
+                        Text="+"
+                        BackgroundColor="{StaticResource AmbarDourado}"
+                        TextColor="{StaticResource Petroleo}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="20"
+                        HeightRequest="36"
+                        WidthRequest="36"
+                        CornerRadius="18"
+                        Padding="0"
+                        Clicked="OnNovaCategoriaClicked"/>
+            </Grid>
+        </Border>
+
+        <!-- ===== LISTA DE CATEGORIAS ===== -->
+        <!-- CollectionView é a lista rolável nativa do MAUI.
+             ItemsSource="{Binding Categorias}" liga a lista ao ViewModel. -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Categorias}"
+                        Margin="16">
+            <!-- Espaçamento de 12 entre os cartões da lista -->
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+
+            <!-- Modelo visual de CADA item da lista.
+                 {Binding Nome}, {Binding Tipo} etc. apontam para as
+                 propriedades da classe Categoria (o item da lista). -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource CardDefault}">
+                        <Grid ColumnDefinitions="*,Auto"
+                              VerticalOptions="Center">
+
+                            <!-- Coluna esquerda: nome da categoria + tipo -->
+                            <VerticalStackLayout Grid.Column="0"
+                                                 Spacing="2">
+                                <Label Text="{Binding Nome}"
+                                       Style="{StaticResource LabelCorpo}"
+                                       FontFamily="OpenSansSemibold"/>
+                                <Label Text="{Binding Tipo}"
+                                       Style="{StaticResource LabelPequeno}"/>
+                            </VerticalStackLayout>
+
+                            <!-- Coluna direita: badges de tipo e status -->
+                            <HorizontalStackLayout Grid.Column="1"
+                                                   Spacing="8"
+                                                   VerticalOptions="Center">
+
+                                <!-- Badge do TIPO: verde para ENTRADA, vermelho para SAIDA.
+                                     DataTrigger troca as cores quando o valor de "Tipo" muda,
+                                     sem precisar de código C# extra. -->
+                                <Border BackgroundColor="{StaticResource VermelhoSuave}"
+                                        StrokeShape="RoundRectangle 999"
+                                        Stroke="Transparent"
+                                        Padding="12,8">
+                                    <Border.Triggers>
+                                        <!-- Quando Tipo == "ENTRADA", o fundo fica verde suave -->
+                                        <DataTrigger TargetType="Border"
+                                                     Binding="{Binding Tipo}"
+                                                     Value="ENTRADA">
+                                            <Setter Property="BackgroundColor"
+                                                    Value="{StaticResource VerdeSuave}"/>
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label Text="{Binding Tipo}"
+                                           FontFamily="OpenSansSemibold"
+                                           FontSize="10"
+                                           TextColor="{StaticResource Vermelho}">
+                                        <Label.Triggers>
+                                            <!-- Texto verde escuro quando for ENTRADA -->
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Tipo}"
+                                                         Value="ENTRADA">
+                                                <Setter Property="TextColor"
+                                                        Value="{StaticResource VerdeEsmeralda}"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Border>
+
+                                <!-- Badge de STATUS: sempre "ATIVO" (todos os dados mock são ativos) -->
+                                <Border BackgroundColor="{StaticResource CinzaSuave}"
+                                        StrokeShape="RoundRectangle 999"
+                                        Stroke="Transparent"
+                                        Padding="12,8">
+                                    <Label Text="ATIVO"
+                                           FontFamily="OpenSansSemibold"
+                                           FontSize="10"
+                                           TextColor="{StaticResource CinzaBadge}"/>
+                                </Border>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

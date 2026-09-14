@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    APPSHELL — Navegação principal do FleetFlow
+
+    O "Shell" é o navegador do aplicativo. É aqui que definimos:
+    1. A tela de LOGIN (fica FORA da barra de abas — o usuário vê só ela);
+    2. A barra de abas inferior (TabBar) com as 5 telas principais.
+
+    As cores da TabBar seguem a identidade visual:
+    fundo azul-petróleo, aba selecionada âmbar, abas inativas cinza.
+-->
+<Shell
+    x:Class="FleetFlow.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:FleetFlow.Mobile.Views"
+    Title="FleetFlow"
+    Shell.TabBarBackgroundColor="{StaticResource Petroleo}"
+    Shell.TabBarTitleColor="{StaticResource AmbarDourado}"
+    Shell.TabBarUnselectedColor="{StaticResource Placeholder}">
+
+    <!-- ===== TELA DE LOGIN (fora do fluxo principal) =====
+         Ela NÃO aparece na barra de abas. Para ir até ela usamos
+         a navegação absoluta: Shell.Current.GoToAsync("//login"). -->
+    <ShellContent
+        Route="login"
+        ContentTemplate="{DataTemplate views:LoginPage}" />
+
+    <!-- ===== BARRA DE ABAS INFERIOR (fluxo principal) =====
+         A rota "home" é o destino da navegação //home após o login. -->
+    <TabBar Route="home">
+
+        <!-- Aba 1: tela inicial com os indicadores financeiros -->
+        <ShellContent
+            Title="Home"
+            Route="HomePage"
+            ContentTemplate="{DataTemplate views:HomePage}" />
+
+        <!-- Aba 2: categorias financeiras -->
+        <ShellContent
+            Title="Categorias"
+            Route="CategoriasPage"
+            ContentTemplate="{DataTemplate views:CategoriasPage}" />
+
+        <!-- Aba 3: formas de pagamento -->
+        <ShellContent
+            Title="Formas"
+            Route="FormasPagamentoPage"
+            ContentTemplate="{DataTemplate views:FormasPagamentoPage}" />
+
+        <!-- Aba 4: perfis de usuário -->
+        <ShellContent
+            Title="Perfis"
+            Route="PerfisPage"
+            ContentTemplate="{DataTemplate views:PerfisPage}" />
+
+        <!-- Aba 5: dados do usuário logado -->
+        <ShellContent
+            Title="Perfil"
+            Route="PerfilPage"
+            ContentTemplate="{DataTemplate views:PerfilPage}" />
+    </TabBar>
+
+</Shell>

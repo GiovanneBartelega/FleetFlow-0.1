@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    TELA INICIAL (HOME) — FleetFlow
+    Painel principal com os indicadores financeiros (KPIs) da transportadora.
+    Todos os números vêm do HomeViewModel, que usa dados fixos (mock).
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FleetFlow.Mobile.Views.HomePage"
+             Title="Home"
+             Shell.NavBarIsVisible="False">
+
+    <!-- ScrollView permite rolar a tela em aparelhos menores -->
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- ===== BARRA SUPERIOR (TopBar) azul-petróleo ===== -->
+            <Border BackgroundColor="{StaticResource Petroleo}"
+                    HeightRequest="90"
+                    StrokeShape="RoundRectangle 0"
+                    Padding="20,0">
+                <!-- Grade com 2 colunas: logo à esquerda, avatar à direita -->
+                <Grid ColumnDefinitions="*,Auto"
+                      VerticalOptions="Center">
+
+                    <!-- Ícone do aplicativo -->
+                    <Image Grid.Column="0"
+                           Source="icone_app.png"
+                           HeightRequest="36"
+                           WidthRequest="36"
+                           HorizontalOptions="Start"/>
+
+                    <!-- Avatar circular âmbar com as iniciais do usuário.
+                         Frame com CornerRadius 20 (metade de 40) vira um círculo. -->
+                    <Frame Grid.Column="1"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           CornerRadius="20"
+                           Padding="0"
+                           BackgroundColor="{StaticResource AmbarDourado}"
+                           BorderColor="Transparent"
+                           HasShadow="False">
+                        <!-- Binding: o texto vem da propriedade Iniciais do ViewModel -->
+                        <Label Text="{Binding Iniciais}"
+                               TextColor="{StaticResource Petroleo}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+                </Grid>
+            </Border>
+
+            <!-- ===== CONTEÚDO PRINCIPAL com padding de 20 ===== -->
+            <VerticalStackLayout Padding="20"
+                                 Spacing="0">
+
+                <!-- Bloco de identificação do usuário logado -->
+                <Label Text="{Binding Saudacao}"
+                       Style="{StaticResource LabelSecao}"/>
+                <Label Text="{Binding Identificacao}"
+                       Style="{StaticResource LabelPequeno}"
+                       Margin="0,4,0,20"/>
+
+                <!-- ===== GRADE 2x2 COM OS 4 CARTÕES DE KPI =====
+                     RowDefinitions "Auto,Auto" = duas linhas com altura automática.
+                     ColumnDefinitions "*,*" = duas colunas de tamanho igual. -->
+                <Grid RowDefinitions="Auto,Auto"
+                      ColumnDefinitions="*,*"
+                      RowSpacing="12"
+                      ColumnSpacing="12">
+
+                    <!-- Card 1: Saldo Atual (ocupa linha 0, coluna 0) -->
+                    <Border Grid.Row="0" Grid.Column="0"
+                            Style="{StaticResource CardDefault}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="SALDO ATUAL"
+                                   Style="{StaticResource LabelLegenda}"/>
+                            <!-- FontSize menor para caber valores monetários longos -->
+                            <Label Text="{Binding SaldoAtual}"
+                                   Style="{StaticResource LabelDisplay}"
+                                   FontSize="22"/>
+                            <!-- Variação positiva em verde -->
+                            <Label Text="{Binding VariacaoSaldo}"
+                                   TextColor="{StaticResource VerdeEsmeralda}"
+                                   FontFamily="OpenSansSemibold"
+                                   FontSize="12"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 2: A Receber (linha 0, coluna 1) -->
+                    <Border Grid.Row="0" Grid.Column="1"
+                            Style="{StaticResource CardDefault}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="A RECEBER"
+                                   Style="{StaticResource LabelLegenda}"/>
+                            <Label Text="{Binding AReceber}"
+                                   Style="{StaticResource LabelDisplay}"
+                                   FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 3: A Pagar (linha 1, coluna 0) -->
+                    <Border Grid.Row="1" Grid.Column="0"
+                            Style="{StaticResource CardDefault}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="A PAGAR"
+                                   Style="{StaticResource LabelLegenda}"/>
+                            <Label Text="{Binding APagar}"
+                                   Style="{StaticResource LabelDisplay}"
+                                   FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 4: Em Viagem (linha 1, coluna 1) -->
+                    <Border Grid.Row="1" Grid.Column="1"
+                            Style="{StaticResource CardDefault}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="EM VIAGEM"
+                                   Style="{StaticResource LabelLegenda}"/>
+                            <Label Text="{Binding EmViagem}"
+                                   Style="{StaticResource LabelDisplay}"
+                                   FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Espaço vertical de 16 -->
+                <BoxView HeightRequest="16" Color="Transparent"/>
+
+                <!-- ===== CARTÃO DE INSIGHT destacado (fundo amarelo claro) ===== -->
+                <Border BackgroundColor="{StaticResource FundoInsight}"
+                        Stroke="{StaticResource AmbarDourado}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="16">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="💡 INSIGHT"
+                               TextColor="{StaticResource AmbarDourado}"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="10"/>
+                        <Label Text="{Binding TextoInsight}"
+                               Style="{StaticResource LabelCorpo}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Espaço vertical de 16 -->
+                <BoxView HeightRequest="16" Color="Transparent"/>
+
+                <!-- Botão que levaria à lista completa de movimentações.
+                     Por enquanto só mostra um aviso de "em desenvolvimento". -->
+                <Button Text="Ver todas as movimentações"
+                        Style="{StaticResource BtnAmber}"
+                        Clicked="OnVerMovimentacoesClicked"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

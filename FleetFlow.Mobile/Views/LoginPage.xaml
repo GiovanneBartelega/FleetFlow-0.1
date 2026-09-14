@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    TELA DE LOGIN — FleetFlow
+    Primeira tela do aplicativo. O login é apenas VISUAL:
+    o botão "Entrar com Google" navega direto para a Home,
+    sem autenticação real (projeto acadêmico com dados mock).
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FleetFlow.Mobile.Views.LoginPage"
+             Title="Login"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundTela}">
+
+    <!-- Grade raiz: 2 linhas (conteúdo central + rodapé), padding lateral de 24 -->
+    <Grid RowDefinitions="*,Auto"
+          Padding="24">
+
+        <!-- ===== CONTEÚDO CENTRAL (linha 0) ===== -->
+        <!-- VerticalStackLayout centralizado verticalmente na tela -->
+        <VerticalStackLayout Grid.Row="0"
+                             VerticalOptions="Center"
+                             Spacing="0">
+
+            <!-- Logo branca do FleetFlow (substitua o arquivo em Resources/Images
+                 pelo arquivo oficial enviado pelo cliente) -->
+            <Image Source="logo_principal_branca.png"
+                   HeightRequest="100"
+                   HorizontalOptions="Center"/>
+
+            <!-- Título de boas-vindas -->
+            <Label Text="Bem-vindo ao FleetFlow"
+                   Style="{StaticResource LabelTitulo}"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"
+                   Margin="0,24,0,8"/>
+
+            <!-- Subtítulo explicando o que o app faz -->
+            <Label Text="Gestão financeira e controle de frota"
+                   Style="{StaticResource LabelPequeno}"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"/>
+
+            <!-- Espaçamento vertical de 40 entre o subtítulo e o botão -->
+            <BoxView HeightRequest="40"
+                     Color="Transparent"/>
+
+            <!-- Botão de login com Google (apenas visual — navega direto).
+                 Usamos um Border com gesto de toque (TapGestureRecognizer)
+                 porque o Button do MAUI não aceita conteúdo personalizado
+                 (imagem + texto) dentro dele. O Border imita o estilo
+                 BtnOutline: fundo transparente, borda azul-petróleo, raio 12. -->
+            <Border BackgroundColor="Transparent"
+                    Stroke="{StaticResource Petroleo}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    HeightRequest="48"
+                    Padding="0">
+                <!-- Gesto de toque: chama o mesmo método do antigo Clicked -->
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEntrarComGoogleTapped"/>
+                </Border.GestureRecognizers>
+
+                <!-- Conteúdo do "botão": letra "G" azul + texto, centralizados -->
+                <HorizontalStackLayout Spacing="12"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                    <!-- Letra "G" no azul oficial do Google -->
+                    <Label Text="G"
+                           TextColor="{StaticResource AzulGoogle}"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="20"
+                           VerticalOptions="Center"/>
+                    <Label Text="Entrar com Google"
+                           TextColor="{StaticResource Petroleo}"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="16"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- ===== RODAPÉ (linha 1) ===== -->
+        <!-- Aviso de termos de uso, fixo na parte de baixo da tela -->
+        <Label Grid.Row="1"
+               Text="Ao entrar, você concorda com os termos de uso"
+               Style="{StaticResource LabelLegenda}"
+               TextColor="{StaticResource Placeholder}"
+               HorizontalTextAlignment="Center"
+               HorizontalOptions="Center"
+               Margin="0,0,0,16"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ============================================================
+         ESTILOS GLOBAIS DO FLEETFLOW
+
+         Um "Style" é um conjunto de formatações reutilizável.
+         Em vez de repetir as mesmas propriedades em cada tela,
+         criamos o estilo uma vez aqui e o aplicamos pela chave (x:Key).
+
+         Exemplo de uso em qualquer tela:
+         <Button Style="{StaticResource BtnPrimary}" ... />
+         ============================================================ -->
+
+    <!-- ==================== BOTÕES ==================== -->
+
+    <!-- Botão principal do app: fundo azul-petróleo, texto branco -->
+    <Style x:Key="BtnPrimary" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Petroleo}"/>
+        <Setter Property="TextColor" Value="{StaticResource Branco}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HeightRequest" Value="48"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- Botão de destaque: fundo âmbar dourado, texto marrom escuro -->
+    <Style x:Key="BtnAmber" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AmbarDourado}"/>
+        <Setter Property="TextColor" Value="{StaticResource TextoBtnAmber}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HeightRequest" Value="48"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- Botão de contorno: fundo transparente com borda azul-petróleo -->
+    <Style x:Key="BtnOutline" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BorderColor" Value="{StaticResource Petroleo}"/>
+        <Setter Property="BorderWidth" Value="2"/>
+        <Setter Property="TextColor" Value="{StaticResource Petroleo}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HeightRequest" Value="48"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- Botão destrutivo: fundo vermelho para ações perigosas (ex.: sair da conta) -->
+    <Style x:Key="BtnDestrutivo" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Vermelho}"/>
+        <Setter Property="TextColor" Value="{StaticResource Branco}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="HeightRequest" Value="48"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- ==================== CARTÃO (CARD) ==================== -->
+
+    <!-- Cartão padrão: fundo branco, cantos arredondados, borda fina cinza.
+         Usamos "Border" (o controle de cartão do MAUI) com StrokeShape
+         para definir o raio dos cantos. -->
+    <Style x:Key="CardDefault" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource SuperficieCard}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Stroke" Value="{StaticResource Divisor}"/>
+        <Setter Property="StrokeThickness" Value="0.5"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="12"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== CAMPOS DE TEXTO ==================== -->
+
+    <!-- Campo de entrada padrão: altura confortável para toque, cantos suaves -->
+    <Style x:Key="InputDefault" TargetType="Entry">
+        <Setter Property="HeightRequest" Value="56"/>
+        <Setter Property="TextColor" Value="{StaticResource TextoPrincipal}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Placeholder}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- ==================== TIPOGRAFIA (LABELS) ====================
+         Escala tipográfica do FleetFlow:
+         - Display: números grandes de KPI (32 SemiBold)
+         - Titulo:  títulos de tela (24 SemiBold)
+         - Secao:   títulos secundários (20 SemiBold)
+         - Corpo:   texto padrão (16 Regular)
+         - Pequeno: descrições (14 Regular)
+         - Legenda: etiquetas pequenas em caixa alta (12 SemiBold)
+         Regra: nunca usar negrito 700 no corpo — SemiBold já é o destaque.
+    -->
+
+    <!-- Número grande de KPI, ex.: "R$ 37.071,04" -->
+    <Style x:Key="LabelDisplay" TargetType="Label">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="TextColor" Value="{StaticResource Petroleo}"/>
+    </Style>
+
+    <!-- Título principal de uma tela -->
+    <Style x:Key="LabelTitulo" TargetType="Label">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="TextColor" Value="{StaticResource Petroleo}"/>
+    </Style>
+
+    <!-- Título de uma seção dentro da tela -->
+    <Style x:Key="LabelSecao" TargetType="Label">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="TextColor" Value="{StaticResource Petroleo}"/>
+    </Style>
+
+    <!-- Texto comum do corpo -->
+    <Style x:Key="LabelCorpo" TargetType="Label">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="TextColor" Value="{StaticResource TextoPrincipal}"/>
+    </Style>
+
+    <!-- Texto de apoio / descrição -->
+    <Style x:Key="LabelPequeno" TargetType="Label">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="TextColor" Value="{StaticResource TextoSecundario}"/>
+    </Style>
+
+    <!-- Etiqueta pequena (geralmente em CAIXA ALTA), ex.: "SALDO ATUAL" -->
+    <Style x:Key="LabelLegenda" TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+        <Setter Property="TextColor" Value="{StaticResource TextoSecundario}"/>
+    </Style>
+
+    <!-- ==================== ESTILOS IMPLÍCITOS ====================
+         Estilos SEM x:Key são aplicados automaticamente a TODOS os
+         controles daquele tipo. Aqui garantimos que toda página tenha
+         o fundo cinza-claro padrão do app. -->
+
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource BackgroundTela}"/>
+    </Style>
+
+</ResourceDictionary>
