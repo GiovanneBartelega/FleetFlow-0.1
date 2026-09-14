@@ -4,19 +4,14 @@ namespace FleetFlow.Api.Models;
 
 public class Usuario
 {
-    public int Id { get; set; }
-
-    [MaxLength(100)]
-    public string Nome { get; set; } = string.Empty;
-
-    [MaxLength(150)]
-    public string Email { get; set; } = string.Empty;
-
-    [MaxLength(500)]
-    public string SenhaHash { get; set; } = string.Empty;
-
-    [MaxLength(50)]
-    public string Perfil { get; set; } = "Administrador";
-
+    public Guid Id { get; set; }
+    public Guid PerfilId { get; set; }
+    public string Nome { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string? GoogleSubjectId { get; set; }
+    public string StatusAprovacao { get; set; } = "AGUARDANDO_APROVACAO";
+    public string? FotoUrl { get; set; }
+    public DateTime? UltimoLoginEm { get; set; }
     public bool Ativo { get; set; } = true;
+    public Perfil? Perfil { get; set; }
 }
